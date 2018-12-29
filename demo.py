@@ -15,6 +15,8 @@ import datetime
 import pandas as pd
 import numpy as np
 import dfgui
+import h5py  # HDF5 support
+
 
 
 def create_dummy_data(size):
@@ -44,6 +46,10 @@ def create_dummy_data(size):
         ("Poisson", np.random.poisson(1.0, size)),
     ])
 
-df = create_dummy_data(1000)
+def load_real_data(filename):
+    store = pd.HDFStore(filename, mode='r')
+    return store['zbvdata']
+
+df = load_real_data('/home/damir/PycharmProjects/data/обор_мощ_рег.zbvdata')
 
 dfgui.show(df)

@@ -157,6 +157,7 @@ class ListCtrlDataFrame(wx.ListCtrl):
                 current = next
 
     def get_filtered_df(self):
+        assert isinstance(self.df_orig, pd.DataFrame)
         return self.df_orig.loc[self.mask, :]
 
     def _on_col_click(self, event):
@@ -556,7 +557,7 @@ class ScatterPlot(wx.Panel):
 
             if len(df) > 0:
                 self.axes.clear()
-                self.axes.plot(df.iloc[:, column_index1].values, df.iloc[:, column_index2].values, 'o', clip_on=False)
+                self.axes.plot(df.iloc[:, column_index1].values, df.iloc[:, column_index2].values, '.', clip_on=False)
 
                 self.canvas.draw()
 
